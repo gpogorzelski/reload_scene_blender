@@ -36,8 +36,14 @@ def register():
 
 
 def unregister():
+        for km, kmi in addon_keymaps:
+        km.keymap_items.remove(kmi)
+    addon_keymaps.clear()
+
+    bpy.utils.unregister_class(DP_OT_draw_operator)
     bpy.app.handlers.load_post.remove(load_handler)
     bpy.utils.unregister_class(dataset_creator.CreateDataset)
+
 
 # This allows you to run the script directly from Blender's Text editor
 # to test the add-on without having to install it.
